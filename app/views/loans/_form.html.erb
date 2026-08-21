@@ -1,0 +1,37 @@
+<%= form_with(model: loan) do |form| %>
+  <% if loan.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(loan.errors.count, "erro") %> impediram este empréstimo:</h2>
+      <ul>
+        <% loan.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :book_id, "Livro (Apenas Disponíveis)", style: "display: block" %>
+    <%= form.collection_select :book_id, Book.where(status: "Disponível"), :id, :title, prompt: "Selecione o livro" %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= form.label :reader_id, "Leitor", style: "display: block" %>
+    <%= form.collection_select :reader_id, Reader.all, :id, :name, prompt: "Selecione o leitor" %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= form.label :reader_loan_password, "Senha de Empréstimo do Leitor", style: "display: block" %>
+    <%= form.password_field :reader_loan_password, required: true %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= form.submit "Confirmar Empréstimo" %>
+  </div>
+<% end %>

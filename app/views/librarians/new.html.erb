@@ -1,0 +1,11 @@
+<% content_for :title, "New librarian" %>
+
+<h1>New librarian</h1>
+
+<%= render "form", librarian: @librarian %>
+
+<br>
+
+<div>
+  <%= link_to "Back to librarians", librarians_path %>
+</div>
